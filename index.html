@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Para Ti, Estefany — Mi Amor Eterno</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary: #1a1a1a;
+      --gold: #D4AF37;
+      --light-gold: #F4E4BC;
+      --cream: #FBF8F1;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #FBF8F1 0%, #F4E4BC 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1fr 500px;
+      min-height: 650px;
+    }
+
+    .content-section {
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .love-quote {
+      background: linear-gradient(135deg, var(--light-gold), rgba(212, 175, 55, 0.1));
+      padding: 25px;
+      border-radius: 16px;
+      border-left: 4px solid var(--gold);
+      font-style: italic;
+      color: var(--primary);
+      margin-bottom: 30px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .reveal-btn {
+      background: linear-gradient(135deg, var(--gold), #B8941F);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+      align-self: flex-start;
+    }
+
+    .reveal-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+    }
+
+    .photo-section {
+      background: linear-gradient(135deg, rgba(244, 228, 188, 0.3), rgba(251, 248, 241, 0.8));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      position: relative;
+    }
+
+    /* Carrusel de fotos profesional */
+    .photo-carousel {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      border: 5px solid rgba(212, 175, 55, 0.3);
+      margin-bottom: 30px;
+    }
+
+    .photo-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+    }
+
+    .photo-slide.active {
+      opacity: 1;
+    }
+
+    .photo-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-counter {
+      position: absolute;
+      bottom: -10px;
+      right: 10px;
+      background: var(--gold);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Ramo de flores PROFESIONAL */
+    .bouquet-container {
+      opacity: 0;
+      transform: scale(0.7) translateY(30px);
+      transition: all 2s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    .bouquet-container.show {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .professional-bouquet {
+      position: relative;
+      width: 280px;
+      height: 350px;
+      margin: 20px auto;
+    }
+
+    /* Flores individuales con CSS puro - MÁS REALISTAS */
+    .flower {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+    }
+
+    .flower::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #FFD700 30%, #FFA500 70%);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+
+    .petal {
+      position: absolute;
+      width: 25px;
+      height: 40px;
+      background: linear-gradient(45deg, #FFD700, #FFEB3B, #FFF176);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      transform-origin: center bottom;
+    }
+
+    .petal:nth-child(1) { transform: rotate(0deg) translateY(-15px); }
+    .petal:nth-child(2) { transform: rotate(45deg) translateY(-15px); }
+    .petal:nth-child(3) { transform: rotate(90deg) translateY(-15px); }
+    .petal:nth-child(4) { transform: rotate(135deg) translateY(-15px); }
+    .petal:nth-child(5) { transform: rotate(180deg) translateY(-15px); }
+    .petal:nth-child(6) { transform: rotate(225deg) translateY(-15px); }
+    .petal:nth-child(7) { transform: rotate(270deg) translateY(-15px); }
+    .petal:nth-child(8) { transform: rotate(315deg) translateY(-15px); }
+
+    /* Posicionamiento de flores */
+    .flower:nth-child(1) { top: 40px; left: 140px; animation: gentle-sway 4s ease-in-out infinite; }
+    .flower:nth-child(2) { top: 80px; left: 100px; animation: gentle-sway 4s ease-in-out infinite 0.5s; }
+    .flower:nth-child(3) { top: 80px; left: 180px; animation: gentle-sway 4s ease-in-out infinite 1s; }
+    .flower:nth-child(4) { top: 120px; left: 80px; animation: gentle-sway 4s ease-in-out infinite 1.5s; }
+    .flower:nth-child(5) { top: 120px; left: 140px; animation: gentle-sway 4s ease-in-out infinite 2s; }
+    .flower:nth-child(6) { top: 120px; left: 200px; animation: gentle-sway 4s ease-in-out infinite 0.3s; }
+    .flower:nth-child(7) { top: 160px; left: 120px; animation: gentle-sway 4s ease-in-out infinite 0.8s; }
+    .flower:nth-child(8) { top: 160px; left: 160px; animation: gentle-sway 4s ease-in-out infinite 1.3s; }
+
+    /* Tallos */
+    .stems {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 180px;
+    }
+
+    .stem {
+      position: absolute;
+      width: 4px;
+      height: 160px;
+      background: linear-gradient(to bottom, #4CAF50, #2E7D32);
+      border-radius: 2px;
+    }
+
+    .stem:nth-child(1) { left: 20px; transform: rotate(-8deg); }
+    .stem:nth-child(2) { left: 35px; transform: rotate(-3deg); }
+    .stem:nth-child(3) { left: 50px; }
+    .stem:nth-child(4) { left: 65px; transform: rotate(3deg); }
+    .stem:nth-child(5) { left: 80px; transform: rotate(8deg); }
+
+    /* Lazo profesional */
+    .ribbon {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 40px;
+    }
+
+    .ribbon::before,
+    .ribbon::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 20px;
+      background: linear-gradient(45deg, var(--gold), #B8941F);
+      border-radius: 20px 20px 5px 5px;
+    }
+
+    .ribbon::before {
+      left: 10px;
+      transform: rotate(-20deg);
+    }
+
+    .ribbon::after {
+      right: 10px;
+      transform: rotate(20deg);
+    }
+
+    .ribbon-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background: var(--gold);
+      border-radius: 50%;
+      border: 2px solid #B8941F;
+    }
+
+    .message {
+      text-align: center;
+      color: var(--primary);
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 20px;
+      max-width: 280px;
+    }
+
+    @keyframes gentle-sway {
+      0%, 100% { transform: rotate(0deg) translateY(0px); }
+      25% { transform: rotate(2deg) translateY(-3px); }
+      75% { transform: rotate(-2deg) translateY(-2px); }
+    }
+
+    /* Efectos de partículas doradas */
+    .sparkle {
+      position: absolute;
+      color: var(--gold);
+      animation: sparkle 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .sparkle:nth-child(1) { top: 20%; left: 20%; font-size: 12px; animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 30%; right: 25%; font-size: 16px; animation-delay: 1s; }
+    .sparkle:nth-child(3) { bottom: 40%; left: 15%; font-size: 14px; animation-delay: 2s; }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    @media (max-width: 1024px) {
+      .main-card {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+      }
+      .photo-section { order: -1; padding: 30px; }
+      .content-section { padding: 40px 30px; }
+      .title { font-size: 36px; }
+      .photo-carousel { width: 280px; height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Efectos de partículas -->
+    <div class="sparkle">✨</div>
+    <div class="sparkle">⭐</div>
+    <div class="sparkle">💫</div>
+
+    <div class="main-card">
+      <section class="content-section">
+        <h1 class="title">Para Ti, ¡ESTEFANY!<br><span style="color: var(--gold);">¡Mi Hermosa BB!</span></h1>
+        
+        <p class="subtitle">
+            "A pesar de la distancia y de todo lo que hemos vivido, quise prepararte esta sorpresa especial. Con el tiempo, al conocerte más, te fuiste convirtiendo en alguien muy importante para mí. Hoy eres mi inspiración, mi alegría y mi vida."
+        </p>
+
+        <div class="love-quote">
+          "En un mundo lleno de flores temporales, tú eres mi girasol eterno. Siempre encuentras la manera de brillar y llenar mi vida de luz, sin importar las circunstancias. Tu amor es el sol que da vida a mi corazón cada día."
+        </div>
+
+        <button id="revealBtn" class="reveal-btn">🌻 Revelar mi sorpresa especial</button>
+      </section>
+
+      <aside class="photo-section">
+        <!-- Carrusel automático de fotos -->
+        <div class="photo-carousel">
+          <div class="photo-slide active">
+            <img src="fotos/foto1.jpg" alt="Mi hermosa Estefany">
+          </div>
+          <div class="photo-slide">
+            <img src="fotos/foto2.jpg" alt="Mi hermosa Estefany">
+          </div>
+          <div class="photo-slide">
+            <img src="fotos/foto3.jpg" alt="Mi hermosa Estefany">
+          </div>
+          <div class="photo-slide">
+            <img src="fotos/foto4.jpg" alt="Mi hermosa Estefany">
+          </div>
+          <div class="photo-counter">
+            <span id="currentPhoto">1</span> / 4
+          </div>
+        </div>
+
+        <!-- Ramo profesional con CSS puro -->
+        <div id="bouquetContainer" class="bouquet-container">
+          <div class="professional-bouquet">
+            <!-- Flores con pétalos reales -->
+            <div class="flower">
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+              <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            </div>
+
+            <!-- Tallos realistas -->
+            <div class="stems">
+              <div class="stem"></div>
+              <div class="stem"></div>
+              <div class="stem"></div>
+              <div class="stem"></div>
+              <div class="stem"></div>
+            </div>
+
+            <!-- Lazo dorado -->
+            <div class="ribbon">
+              <div class="ribbon-center"></div>
+            </div>
+          </div>
+
+          <div class="message">
+            <strong>Un ramo de girasoles dorados</strong><br>
+            Tan radiantes como tu sonrisa mi hermosa bb!<br>
+            <em style="color: var(--gold);">¡Te amo infinitamente! 💛</em>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // Carrusel automático de fotos
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.photo-slide');
+    const counter = document.getElementById('currentPhoto');
+    
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+      counter.textContent = currentSlide + 1;
+    }
+
+    // Cambiar foto cada 3 segundos
+    setInterval(nextSlide, 3000);
+
+    // Revelar ramo
+    document.getElementById('revealBtn').addEventListener('click', function() {
+      document.getElementById('bouquetContainer').classList.add('show');
+      this.style.display = 'none';
+      
+      // Efecto de pétalos cayendo
+      createPetalEffect();
+    });
+
+    function createPetalEffect() {
+      for(let i = 0; i < 25; i++) {
+        setTimeout(() => {
+          const petal = document.createElement('div');
+          petal.innerHTML = '🌸';
+          petal.style.cssText = `
+            position: fixed;
+            font-size: ${Math.random() * 15 + 15}px;
+            left: ${Math.random() * 100}vw;
+            top: -50px;
+            pointer-events: none;
+            z-index: 1000;
+            animation: petalFall ${3 + Math.random() * 2}s linear forwards;
+          `;
+          document.body.appendChild(petal);
+          setTimeout(() => petal.remove(), 5000);
+        }, i * 150);
+      }
+    }
+
+    // Crear animación de pétalos cayendo
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes petalFall {
+        to {
+          transform: translateY(${window.innerHeight + 100}px) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
